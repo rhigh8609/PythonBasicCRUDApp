@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Item</title>
+</head>
+<body>
+    <h2>Edit Item</h2>
+
+    <!-- Start of the form to edit the item -->
+    <form method="post">
+        <!-- Input field populated with the current item's name, ready to be edited -->
+        <input type="text" name="name" value="{{ item.name }}">
+
+        <!-- Button to submit the edited item and save the changes -->
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <!-- A line break for visual separation -->
+    <br>
+
+    <!-- Link to navigate back to the main list of items -->
+    <a href="{{ url_for('index') }}">Back to List</a>
+</body>
+</html>

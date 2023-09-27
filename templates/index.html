@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD App</title>
+</head>
+
+<body style="display: flex; flex-direction: column; width: 100%;">
+    <h1 style="text-align: center; color: sienna; margin-bottom: 2rem;">Basic CRUD Application</h1>
+    <p style="width: 60%; padding: 1rem; border-radius: 1rem; background-color: beige; box-shadow: 1px 1px black; align-self: center; justify-self: center;">The purpose of this application is to demonstrate basic CRUD functionality using Flask and SqlAlchemy. 
+        It is for practice, educational purposes, which is why the model is simple and the so is the functionality.
+    </p>
+    <!-- Loop through each item in the 'items' variable and display them -->
+    <ul>
+        {% for item in items %}
+        <li style="margin-bottom: 0.5rem;">
+            <!-- Display the item's name -->
+            {{item.name}}
+
+            <!-- Provide a link to delete the specific item -->
+            <a href="{{ url_for('delete_item', id=item.id) }}" style="margin-left: 1rem;">Delete</a>
+
+            <!-- Provide a link to edit/update the specific item -->
+            <a href="{{ url_for('update_item', id=item.id) }}" style="margin-left: 1rem;">Edit</a>
+        </li> 
+        {% endfor %}
+    </ul>
+
+    <!-- Form to add a new item to the list -->
+    <form method="post" action="{{ url_for('add_item') }}">
+        <!-- Input field for the item's name -->
+        <input type="text" name="name" placeholder="Item Name">
+
+        <!-- Button to submit the form and add the item -->
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>
