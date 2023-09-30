@@ -1,24 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Edit Item</title>
+    <title>Edit Exercise</title>
+    <!-- Including Bootstrap CSS from CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <h2>Edit Item</h2>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Edit Exercise</h2>
 
-    <!-- Start of the form to edit the item -->
-    <form method="post">
-        <!-- Input field populated with the current item's name, ready to be edited -->
-        <input type="text" name="name" value="{{ item.name }}">
+        <!-- Start of the form to edit the exercise -->
+        <form method="post">
+            <div class="form-group">
+                <label for="name"><strong>Exercise Name:</strong></label>
+                <input type="text" class="form-control" name="name" id="name" value="{{ exercise.name }}" required>
+            </div>
 
-        <!-- Button to submit the edited item and save the changes -->
-        <button type="submit">Save Changes</button>
-    </form>
+            <div class="form-group">
+                <label for="weight"><strong>Weight:</strong></label>
+                <input type="text" class="form-control" name="weight" id="weight" value="{{ exercise.weight }}" required>
+            </div>
 
-    <!-- A line break for visual separation -->
-    <br>
+            <div class="form-group">
+                <label for="reps"><strong>Reps:</strong></label>
+                <input type="number" class="form-control" name="reps" id="reps" value="{{ exercise.reps }}" required>
+            </div>
 
-    <!-- Link to navigate back to the main list of items -->
-    <a href="{{ url_for('index') }}">Back to List</a>
+            <div class="form-group">
+                <label for="date"><strong>Date:</strong></label>
+                <input type="date" class="form-control" name="date" id="date" value="{{ exercise.date.strftime('%Y-%m-%d') }}">
+            </div>
+
+            <!-- Button to submit the edited exercise and save the changes -->
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+
+        <!-- A line break for visual separation -->
+        <br>
+
+        <!-- Link to navigate back to the main list of exercises -->
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
 </body>
+
 </html>

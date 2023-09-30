@@ -1,37 +1,71 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>CRUD App</title>
+    <title>Exercise CRUD Application</title>
+    <!-- Including Bootstrap CSS from CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body style="display: flex; flex-direction: column; width: 100%;">
-    <h1 style="text-align: center; color: sienna; margin-bottom: 2rem;">Basic CRUD Application</h1>
-    <p style="width: 60%; padding: 1rem; border-radius: 1rem; background-color: beige; box-shadow: 1px 1px black; align-self: center; justify-self: center;">The purpose of this application is to demonstrate basic CRUD functionality using Flask and SqlAlchemy. 
-        It is for practice, educational purposes, which is why the model is simple and the so is the functionality.
-    </p>
-    <!-- Loop through each item in the 'items' variable and display them -->
-    <ul>
-        {% for item in items %}
-        <li style="margin-bottom: 0.5rem;">
-            <!-- Display the item's name -->
-            {{item.name}}
+    <div class="container mt-5">
+        <h1 class="text-center text-sienna mb-4">Exercise CRUD Application</h1>
+        
+        <div class="card mb-4" style="max-width: 60%; margin: 0 auto; background-color: beige; box-shadow: 1px 1px black;">
+            <div class="card-body">
+                <p class="card-text">
+                    The purpose of this application is to demonstrate basic CRUD functionality using Flask and SqlAlchemy. It is for practice, educational purposes, which is why the model is simple and so is the functionality.
+                </p>
+            </div>
+        </div>
 
-            <!-- Provide a link to delete the specific item -->
-            <a href="{{ url_for('delete_item', id=item.id) }}" style="margin-left: 1rem;">Delete</a>
+        <!-- Replacing the ul list with a Bootstrap-styled table -->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Reps</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exercise in exercises %}
+                <tr>
+                    <td>{{exercise.name}}</td>
+                    <td>{{exercise.weight}}</td>
+                    <td>{{exercise.reps}}</td>
+                    <td>{{exercise.date.strftime('%Y-%m-%d')}}</td>
+                    <td>
+                        <a href="{{ url_for('delete_exercise', id=exercise.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{{ url_for('update_exercise', id=exercise.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            <!-- Provide a link to edit/update the specific item -->
-            <a href="{{ url_for('update_item', id=item.id) }}" style="margin-left: 1rem;">Edit</a>
-        </li> 
-        {% endfor %}
-    </ul>
-
-    <!-- Form to add a new item to the list -->
-    <form method="post" action="{{ url_for('add_item') }}">
-        <!-- Input field for the item's name -->
-        <input type="text" name="name" placeholder="Item Name">
-
-        <!-- Button to submit the form and add the item -->
-        <button type="submit">Add</button>
-    </form>
+        <form method="post" action="{{ url_for('add_exercise') }}" class="mb-5">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" name="name" placeholder="Exercise Name" required>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="weight" placeholder="Weight (e.g. 60.5)" required>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" name="reps" placeholder="Reps" required>
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" name="date">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-success">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>
